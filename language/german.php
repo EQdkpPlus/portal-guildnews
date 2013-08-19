@@ -22,4 +22,5 @@
 	$lang['pm_guildnews_maxitems']	= 'Maximal angezeigte News';
 	$lang['guildnews_no_news']		= 'Es sind keine News vorhanden.';
 	$lang['guildnews_wrong_game']	= 'Dieses Spiel wird von diesem Portalmodul nicht unterstützt.';
+	$lang['pm_guildnews_options']	= 'Angezeigte Typen';
 ?>

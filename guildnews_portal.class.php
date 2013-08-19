@@ -42,6 +42,15 @@ class guildnews_portal extends portal_generic {
 			'language'			=>	'pm_guildnews_maxitems',
 			'property'			=>	'text',
 			'size'				=>	'3',
+			'default'			=> 5,
+		),
+		'pm_guildnews_maxitems'	=> array(
+				'name'				=>	'pm_guildnews_options',
+				'language'			=>	'pm_guildnews_options',
+				'property'			=>	'jq_multiselect',
+				'options'			=>	array(
+					'guildCreated'=>'guildCreated',	'itemLoot' => 'itemLoot', 'itemPurchase' => 'itemPurchase', 'guildLevel' => 'guildLevel', 'guildAchievement' => 'guildAchievement', 'playerAchievement' => 'playerAchievement'
+				),
 		),
 	);
 	protected $install	= array(
@@ -61,10 +70,16 @@ class guildnews_portal extends portal_generic {
 				chartooltip_js();
 				
 				//Guildnews
-				$arrNews = $this->pdc->get('portal.module.guildnews.'.$this->root_path);
+				$arrNews = $this->pdc->get('portal.module.guildnews');
 				if (!$arrNews){
-					$arrNews = $this->game->callFunc('parseGuildnews', array($guilddata['news'], $maxItems));
-					$this->pdc->put('portal.module.guildnews.'.$this->root_path, $arrNews, 3600);
+					if ($this->config->get('pm_guildnews_options')) {
+						$arrOptions = unserialize($this->config->get('pm_guildnews_options'));
+						if (count($arrOptions) < 1) $arrOptions = false;
+					} else $arrOptions = false;
+						
+						
+					$arrNews = $this->game->callFunc('parseGuildnews', array($guilddata['news'], $maxItems, $arrOptions));
+					$this->pdc->put('portal.module.guildnews', $arrNews, 3600);
 				}
 
 				if (is_array($arrNews) && count($arrNews) > 0){
