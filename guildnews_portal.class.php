@@ -102,10 +102,5 @@ class guildnews_portal extends portal_generic {
 		
 		return $out;
 	}
-	
-	
-	public function reset() {
-		$this->pdc->del('portal.module.guildnews');
-	}
 }
 ?>
