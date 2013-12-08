@@ -21,59 +21,50 @@ if ( !defined('EQDKP_INC') ){
 }
 
 class guildnews_portal extends portal_generic {
-	public static function __shortcuts() {
-		$shortcuts = array('pdc', 'game', 'config', 'time', 'user');
-		return array_merge(parent::$shortcuts, $shortcuts);
-	}
 
-	protected $path		= 'guildnews';
-	protected $data		= array(
+	protected static $path		= 'guildnews';
+	protected static $data		= array(
 		'name'			=> 'Guildnews',
 		'version'		=> '0.1.0',
 		'author'		=> 'GodMod',
 		'contact'		=> EQDKP_PROJECT_URL,
 		'description'	=> 'Show Guildnews from WoW Armory',
+		'lang_prefix'	=> 'guildnews_'
 	);
-	protected $positions = array('left1', 'left2', 'right', 'middle', 'bottom');
+	protected static $positions = array('left1', 'left2', 'right', 'middle', 'bottom');
 	protected $settings	= array(
-
-		'pm_guildnews_maxitems'	=> array(
-			'name'				=>	'pm_guildnews_maxitems',
-			'language'			=>	'pm_guildnews_maxitems',
-			'property'			=>	'text',
-			'size'				=>	'3',
-			'default'			=> 5,
+		'maxitems'	=> array(
+			'type'		=> 'text',
+			'size'		=> '3',
+			'default'	=> 5,
 		),
-		'pm_guildnews_maxitems'	=> array(
-				'name'				=>	'pm_guildnews_options',
-				'language'			=>	'pm_guildnews_options',
-				'property'			=>	'jq_multiselect',
-				'options'			=>	array(
-					'guildCreated'=>'guildCreated',	'itemLoot' => 'itemLoot', 'itemPurchase' => 'itemPurchase', 'guildLevel' => 'guildLevel', 'guildAchievement' => 'guildAchievement', 'playerAchievement' => 'playerAchievement'
-				),
+		'options'	=> array(
+			'type'		=> 'jq_multiselect',
+			'options'	=> array(
+				'guildCreated'=>'guildCreated',	'itemLoot' => 'itemLoot', 'itemPurchase' => 'itemPurchase', 'guildLevel' => 'guildLevel', 'guildAchievement' => 'guildAchievement', 'playerAchievement' => 'playerAchievement'
+			),
 		),
 	);
-	protected $install	= array(
+	protected static $install	= array(
 		'autoenable'		=> '0',
 		'defaultposition'	=> 'right',
 		'defaultnumber'		=> '1',
 	);
-
 
 	public function output() {
 		if ($this->config->get('default_game') == 'wow'){
 			if($this->config->get('uc_servername') && $this->config->get('uc_server_loc')){
 				$this->game->new_object('bnet_armory', 'armory', array($this->config->get('uc_server_loc'), $this->config->get('uc_data_lang')));
 				$guilddata = $this->game->obj['armory']->guild($this->config->get('guildtag'), $this->config->get('uc_servername'));
-				$maxItems = ($this->config->get('pm_guildnews_maxitems')) ? $this->config->get('pm_guildnews_maxitems') : 5;
+				$maxItems = ($this->config('maxitems')) ? $this->config('maxitems') : 5;
 				infotooltip_js();
 				chartooltip_js();
 				
 				//Guildnews
 				$arrNews = $this->pdc->get('portal.module.guildnews');
 				if (!$arrNews){
-					if ($this->config->get('pm_guildnews_options')) {
-						$arrOptions = unserialize($this->config->get('pm_guildnews_options'));
+					if ($this->config('options')) {
+						$arrOptions = unserialize($this->config('options'));
 						if (count($arrOptions) < 1) $arrOptions = false;
 					} else $arrOptions = false;
 						

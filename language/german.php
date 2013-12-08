@@ -19,8 +19,8 @@
 	$lang['guildnews']				= 'Gildennews';
 	$lang['guildnews_name']			= 'Gildennews';
 	$lang['guildnews_desc']			= 'Zeigt die Gildennews aus der WoW Armory an';
-	$lang['pm_guildnews_maxitems']	= 'Maximal angezeigte News';
+	$lang['guildnews_f_maxitems']	= 'Maximal angezeigte News';
 	$lang['guildnews_no_news']		= 'Es sind keine News vorhanden.';
 	$lang['guildnews_wrong_game']	= 'Dieses Spiel wird von diesem Portalmodul nicht unterstützt.';
-	$lang['pm_guildnews_options']	= 'Angezeigte Typen';
+	$lang['guildnews_f_options']	= 'Angezeigte Typen';
 ?>
