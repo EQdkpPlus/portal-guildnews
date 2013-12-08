@@ -39,7 +39,7 @@ class guildnews_portal extends portal_generic {
 			'default'	=> 5,
 		),
 		'options'	=> array(
-			'type'		=> 'jq_multiselect',
+			'type'		=> 'multiselect',
 			'options'	=> array(
 				'guildCreated'=>'guildCreated',	'itemLoot' => 'itemLoot', 'itemPurchase' => 'itemPurchase', 'guildLevel' => 'guildLevel', 'guildAchievement' => 'guildAchievement', 'playerAchievement' => 'playerAchievement'
 			),
