@@ -29,7 +29,8 @@ class guildnews_portal extends portal_generic {
 		'author'		=> 'GodMod',
 		'contact'		=> EQDKP_PROJECT_URL,
 		'description'	=> 'Show Guildnews from WoW Armory',
-		'lang_prefix'	=> 'guildnews_'
+		'lang_prefix'	=> 'guildnews_',
+		'icon'			=> 'fa-trophy',
 	);
 	protected static $positions = array('left1', 'left2', 'right', 'middle', 'bottom');
 	protected $settings	= array(
