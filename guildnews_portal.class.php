@@ -51,6 +51,8 @@ class guildnews_portal extends portal_generic {
 		'defaultposition'	=> 'right',
 		'defaultnumber'		=> '1',
 	);
+	
+	protected static $apiLevel = 20;
 
 	public function output() {
 		if ($this->config->get('default_game') == 'wow'){
