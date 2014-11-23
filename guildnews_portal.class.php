@@ -56,9 +56,9 @@ class guildnews_portal extends portal_generic {
 
 	public function output() {
 		if ($this->config->get('default_game') == 'wow'){
-			if($this->config->get('uc_servername') && $this->config->get('uc_server_loc')){
+			if($this->config->get('servername') && $this->config->get('uc_server_loc')){
 				$this->game->new_object('bnet_armory', 'armory', array($this->config->get('uc_server_loc'), $this->config->get('uc_data_lang')));
-				$guilddata = $this->game->obj['armory']->guild($this->config->get('guildtag'), $this->config->get('uc_servername'));
+				$guilddata = $this->game->obj['armory']->guild($this->config->get('guildtag'), $this->config->get('servername'));
 				$maxItems = ($this->config('maxitems')) ? $this->config('maxitems') : 5;
 				infotooltip_js();
 				chartooltip_js();
