@@ -1,6 +1,6 @@
 <?php
 /*	Project:	EQdkp-Plus
- *	Package:	Guildnews Portal Module
+ *	Package:	EQdkp-Plus Language File
  *	Link:		http://eqdkp-plus.eu
  *
  *	Copyright (C) 2006-2015 EQdkp-Plus Developer Team
@@ -19,11 +19,25 @@
  *	along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-	$lang['guildnews']				= 'Guildnews';
-	$lang['guildnews_name']			= 'Guildnews';
-	$lang['guildnews_desc']			= 'Displays the WoW Armory Guildnews';
-	$lang['guildnews_f_maxitems']	= 'Max. shown news';
-	$lang['guildnews_no_news']		= 'There are no news.';
-	$lang['guildnews_wrong_game']	= 'This game is not supported by this portal module.';
-	$lang['guildnews_f_options']	= 'Display following types';
+ 
+if (!defined('EQDKP_INC')) {
+	die('You cannot access this file directly.');
+}
+
+//Language: English	
+//Created by EQdkp Plus Translation Tool on  2014-12-17 21:28
+//File: portal/guildnews/language/english.php
+//Source-Language: german
+
+$lang = array( 
+	"guildnews" => 'Guildnews',
+	"guildnews_name" => 'Guildnews',
+	"guildnews_desc" => 'Displays the WoW Armory Guildnews',
+	"guildnews_f_maxitems" => 'Max. shown news',
+	"guildnews_no_news" => 'There are no news.',
+	"guildnews_wrong_game" => 'This game is not supported by this portal module.',
+	"guildnews_f_options" => 'Display following types',
+	
+);
+
 ?>
