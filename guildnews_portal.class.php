@@ -28,7 +28,7 @@ class guildnews_portal extends portal_generic {
 	protected static $path		= 'guildnews';
 	protected static $data		= array(
 		'name'			=> 'Guildnews',
-		'version'		=> '0.1.0',
+		'version'		=> '0.2.0',
 		'author'		=> 'GodMod',
 		'contact'		=> EQDKP_PROJECT_URL,
 		'description'	=> 'Show Guildnews from WoW Armory',
