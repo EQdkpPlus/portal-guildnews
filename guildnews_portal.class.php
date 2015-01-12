@@ -82,7 +82,7 @@ class guildnews_portal extends portal_generic {
 				if (is_array($arrNews) && count($arrNews) > 0){
 					if (count($arrNews) > $maxItems) $arrNews = array_slice($arrNews, 0, $maxItems);
 					
-					$out = '<table width="100%" border="0" cellspacing="1" cellpadding="2" class="noborder colorswitch hoverrows">';
+					$out = '<table class="table fullwidth noborder colorswitch hoverrows">';
 
 					foreach ($arrNews as $news){
 
