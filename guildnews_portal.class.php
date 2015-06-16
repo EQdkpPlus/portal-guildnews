@@ -67,16 +67,16 @@ class guildnews_portal extends portal_generic {
 				chartooltip_js();
 				
 				//Guildnews
-				$arrNews = $this->pdc->get('portal.module.guildnews');
+				$arrNews = $this->pdc->get('portal.module.guildnews.'.$this->user->lang_name);
 				if (!$arrNews){
 					if ($this->config('options')) {
-						$arrOptions = unserialize($this->config('options'));
+						$arrOptions = $this->config('options');
 						if (count($arrOptions) < 1) $arrOptions = false;
 					} else $arrOptions = false;
 						
 						
 					$arrNews = $this->game->callFunc('parseGuildnews', array($guilddata['news'], $maxItems, $arrOptions));
-					$this->pdc->put('portal.module.guildnews', $arrNews, 3600);
+					$this->pdc->put('portal.module.guildnews.'.$this->user->lang_name, $arrNews, 3600);
 				}
 
 				if (is_array($arrNews) && count($arrNews) > 0){
