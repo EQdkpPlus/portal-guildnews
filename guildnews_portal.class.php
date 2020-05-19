@@ -3,7 +3,7 @@
  *	Package:	Guildnews Portal Module
  *	Link:		http://eqdkp-plus.eu
  *
- *	Copyright (C) 2006-2015 EQdkp-Plus Developer Team
+ *	Copyright (C) 2006-2016 EQdkp-Plus Developer Team
  *
  *	This program is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU Affero General Public License as published
@@ -28,7 +28,7 @@ class guildnews_portal extends portal_generic {
 	protected static $path		= 'guildnews';
 	protected static $data		= array(
 		'name'			=> 'Guildnews',
-		'version'		=> '0.2.2',
+		'version'		=> '0.3.0',
 		'author'		=> 'GodMod',
 		'contact'		=> EQDKP_PROJECT_URL,
 		'description'	=> 'Show Guildnews from WoW Armory',
@@ -45,7 +45,7 @@ class guildnews_portal extends portal_generic {
 		'options'	=> array(
 			'type'		=> 'multiselect',
 			'options'	=> array(
-				'guildCreated'=>'guildCreated',	'itemLoot' => 'itemLoot', 'itemPurchase' => 'itemPurchase', 'guildLevel' => 'guildLevel', 'guildAchievement' => 'guildAchievement', 'playerAchievement' => 'playerAchievement'
+				'encounter'=>'encounter',	'character_achievement' => 'character_achievement', 
 			),
 		),
 	);
@@ -61,13 +61,14 @@ class guildnews_portal extends portal_generic {
 		if ($this->config->get('default_game') == 'wow'){
 			if($this->config->get('servername') && $this->config->get('uc_server_loc')){
 				$this->game->new_object('bnet_armory', 'armory', array($this->config->get('uc_server_loc'), $this->config->get('uc_data_lang')));
-				$guilddata = $this->game->obj['armory']->guild($this->config->get('guildtag'), $this->config->get('servername'));
+				
+				$arrActivity = $this->game->obj['armory']->guildActivity($this->config->get('guildtag'), $this->config->get('servername'));
 				$maxItems = ($this->config('maxitems')) ? $this->config('maxitems') : 5;
 				infotooltip_js();
 				chartooltip_js();
 				
 				//Guildnews
-				$arrNews = $this->pdc->get('portal.module.guildnews.'.$this->user->lang_name);
+				//$arrNews = $this->pdc->get('portal.module.guildnews.'.$this->user->lang_name);
 				if (!$arrNews){
 					if ($this->config('options')) {
 						$arrOptions = $this->config('options');
@@ -75,7 +76,7 @@ class guildnews_portal extends portal_generic {
 					} else $arrOptions = false;
 						
 						
-					$arrNews = $this->game->callFunc('parseGuildnews', array($guilddata['news'], $maxItems, $arrOptions));
+					$arrNews = $this->game->callFunc('parseGuildnews', array($arrActivity['activities'], $maxItems, $arrOptions));
 					$this->pdc->put('portal.module.guildnews.'.$this->user->lang_name, $arrNews, 3600);
 				}
 
@@ -85,11 +86,12 @@ class guildnews_portal extends portal_generic {
 					$out = '<table class="table fullwidth noborder colorswitch hoverrows">';
 
 					foreach ($arrNews as $news){
-
+						$icon = (strlen($news['icon'])) ? '<div class="user-avatar-small user-avatar-border"><img src="'.$news['icon'].'" alt="" class="user-avatar small" /></div>' : '';
+						
 						if ($this->position == 'middle' || $this->position == 'bottom'){
-							$out .= '<tr><td width="30"><div style="text-align:center;"><img src="'.$news['icon'].'" alt="" /></div></td><td>'.$news['text'].'</td><td width="80" class="nowrap">'.$this->time->nice_date($news['date'], 60*60*24*7).'</td></tr>';
+							$out .= '<tr><td width="30">'.$icon.'</td><td>'.$news['text'].'</td><td width="80" class="nowrap">'.$this->time->nice_date($news['date'], 60*60*24*7).'</td></tr>';
 						} else {
-							$out .= '<tr><td width="30"><div style="text-align:center;"><img src="'.$news['icon'].'" alt="" /></div></td><td>'.$news['text'].'<div class="small italic">'.$this->time->nice_date($news['date'], 60*60*24*7).'</div></td></tr>';
+							$out .= '<tr><td width="30">'.$icon.'</td><td>'.$news['text'].'<div class="small italic">'.$this->time->nice_date($news['date'], 60*60*24*7).'</div></td></tr>';
 						}
 					}
 
