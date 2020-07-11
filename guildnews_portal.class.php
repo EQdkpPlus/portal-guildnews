@@ -28,7 +28,7 @@ class guildnews_portal extends portal_generic {
 	protected static $path		= 'guildnews';
 	protected static $data		= array(
 		'name'			=> 'Guildnews',
-		'version'		=> '0.3.0',
+		'version'		=> '0.3.1',
 		'author'		=> 'GodMod',
 		'contact'		=> EQDKP_PROJECT_URL,
 		'description'	=> 'Show Guildnews from WoW Armory',
@@ -68,7 +68,7 @@ class guildnews_portal extends portal_generic {
 				chartooltip_js();
 				
 				//Guildnews
-				//$arrNews = $this->pdc->get('portal.module.guildnews.'.$this->user->lang_name);
+				$arrNews = $this->pdc->get('portal.module.guildnews.'.$this->user->lang_name);
 				if (!$arrNews){
 					if ($this->config('options')) {
 						$arrOptions = $this->config('options');
@@ -86,7 +86,7 @@ class guildnews_portal extends portal_generic {
 					$out = '<table class="table fullwidth noborder colorswitch hoverrows">';
 
 					foreach ($arrNews as $news){
-						$icon = (strlen($news['icon'])) ? '<div class="user-avatar-small user-avatar-border"><img src="'.$news['icon'].'" alt="" class="user-avatar small" /></div>' : '';
+						$icon = (strlen($news['icon'])) ? '<div class="user-avatar-small user-avatar-border"><img src="'.$news['icon'].'" alt="" class="user-avatar small" loading="lazy"/></div>' : '';
 						
 						if ($this->position == 'middle' || $this->position == 'bottom'){
 							$out .= '<tr><td width="30">'.$icon.'</td><td>'.$news['text'].'</td><td width="80" class="nowrap">'.$this->time->nice_date($news['date'], 60*60*24*7).'</td></tr>';
